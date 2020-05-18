@@ -1,4 +1,4 @@
-package pl.qacourses.addressbook;
+package pl.qacourses.addressbook.model;
 
 public class GroupData {
     private final String name;
