@@ -1,6 +1,7 @@
-package pl.qacourses.addressbook;
+package pl.qacourses.addressbook.tests;
 
 import org.testng.annotations.*;
+import pl.qacourses.addressbook.model.GroupData;
 
 //clasa GroupCreationTest roszerza klase TestBase
 //w klasie TestBase beda funkcje pomocnicze wykorzystywane w wielu testach
@@ -10,11 +11,11 @@ public class GroupCreationTest extends TestBase {
 
   @Test
   public void testGroupCreation() throws Exception {
-    gotoGroupPage();
-    initGroupCreation();
-    fillGroupForm(new GroupData("test1", "test2", "test3"));
-    submitGroupCreation();
-    returnToGroupPage();
+    app.getNavigationHelper().gotoGroupPage();
+    app.getGroupHelper().initGroupCreation();
+    app.getGroupHelper().fillGroupForm(new GroupData("test1", "test2", "test3"));
+    app.getGroupHelper().submitGroupCreation();
+    app.getGroupHelper().returnToGroupPage();
 
   }
 
