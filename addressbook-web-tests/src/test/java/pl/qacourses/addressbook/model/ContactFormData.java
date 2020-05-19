@@ -1,4 +1,4 @@
-package pl.qacourses.addressbook.model_contact;
+package pl.qacourses.addressbook.model;
 
 public class ContactFormData {
     private final String firstname;
