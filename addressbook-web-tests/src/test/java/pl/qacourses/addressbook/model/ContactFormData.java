@@ -6,13 +6,19 @@ public class ContactFormData {
     private final String address;
     private final String mobile;
     private final String emial;
+    private String group;
 
-    public ContactFormData(String firstname, String lastname, String address, String mobile, String emial) {
+    public String getGroup() {
+        return group;
+    }
+
+    public ContactFormData(String firstname, String lastname, String address, String mobile, String emial, String group) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.mobile = mobile;
         this.emial = emial;
+        this.group = group;
     }
 
     public String getFirstname() {
