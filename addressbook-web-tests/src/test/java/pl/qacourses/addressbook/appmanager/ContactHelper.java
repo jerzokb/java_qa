@@ -50,4 +50,17 @@ public class ContactHelper extends HelperBase {
     public void submitContactModification() {
         click(By.name("update"));
     }
+
+    public void createContact(ContactFormData contactFormData) {
+        fillContactForm(contactFormData,true);
+        submitNewContact();
+        returnToHomePage();
+    }
+
+    public void editContact(ContactFormData contactFormData) {
+        selectContact();
+        initContactModification();
+        fillContactForm(contactFormData, false);
+        submitContactModification();
+    }
 }

@@ -2,6 +2,8 @@ package pl.qacourses.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import pl.qacourses.addressbook.model.GroupData;
 
 public class GroupHelper extends HelperBase{
@@ -21,6 +23,7 @@ public class GroupHelper extends HelperBase{
         type(By.name("group_name"), groupData.getName());
         type(By.name("group_header"), groupData.getHeader());
         type(By.name("group_footer"), groupData.getFooter());
+
     }
 
     public void initGroupCreation() {
@@ -52,5 +55,13 @@ public class GroupHelper extends HelperBase{
 
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public void editGroup(GroupData groupData) {
+        selectGroup();
+        initGroupModification();
+        fillGroupForm(new GroupData("test1", "test2", "test3"));
+        submitGroupModification();
+        returnToGroupPage();
     }
 }
