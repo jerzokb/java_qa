@@ -12,7 +12,7 @@ public class GroupDeletionTestChrome extends TestBaseChrome {
       app.getGroupHelper().createGroup(new GroupData("test1", null, null));
 
     }
-    app.getGroupHelper().selectGroup();
+    app.getGroupHelper().selectGroup(0);
     app.getGroupHelper().deleteSelectedGroup();
     app.getGroupHelper().returnToGroupPage();
   }
