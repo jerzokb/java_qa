@@ -1,11 +1,13 @@
 package pl.qacourses.addressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.qacourses.addressbook.model.ContactFormData;
+import pl.qacourses.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
     public ContactHelper(WebDriver wd) {
@@ -35,8 +37,8 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void selectContact() {
-        click(By.name("selected[]"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
    public void deleteSelectedContact() {
         click(By.xpath("//input[@value='Delete']"));
@@ -58,7 +60,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void editContact(ContactFormData contactFormData) {
-        selectContact();
+       // selectContact();
         initContactModification();
         fillContactForm(contactFormData, false);
         submitContactModification();
@@ -67,5 +69,25 @@ public class ContactHelper extends HelperBase {
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public List<ContactFormData> getContactList() {
+        List<ContactFormData> contacts = new ArrayList<ContactFormData>();
+        //List<WebElement> rows_table = wd.findElements(By.name("entry"));
+        List<WebElement> rows_table = wd.findElements(By.id("maintable"));
+        int rows_count = rows_table.size();
+
+        for (int row = 0; row < rows_count; row++) {
+            //To locate columns(cells) of that specific row.
+            List<WebElement> Columns_row = rows_table.get(row).findElements(By.tagName("td"));
+
+            String lastname = Columns_row.get(1).getText();
+            String firstname = Columns_row.get(2).getText();
+           // int id = Integer.parseInt(Columns_row.findElement(By.tagName("input")).getAttribute("value"));
+            ContactFormData contact = new ContactFormData(row, firstname, lastname, null, null, null, null);
+            contacts.add(contact);
+        }
+
+        return contacts;
     }
 }
