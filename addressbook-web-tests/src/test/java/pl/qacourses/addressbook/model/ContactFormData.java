@@ -1,6 +1,9 @@
 package pl.qacourses.addressbook.model;
 
+import java.util.Objects;
+
 public class ContactFormData {
+    private int id;
     private final String firstname;
     private final String lastname;
     private final String address;
@@ -13,12 +16,27 @@ public class ContactFormData {
     }
 
     public ContactFormData(String firstname, String lastname, String address, String mobile, String emial, String group) {
+        this.id = Integer.MAX_VALUE;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.mobile = mobile;
         this.emial = emial;
         this.group = group;
+    }
+
+    public ContactFormData(int id, String firstname, String lastname, String address, String mobile, String emial, String group) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.mobile = mobile;
+        this.emial = emial;
+        this.group = group;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstname() {
@@ -39,5 +57,32 @@ public class ContactFormData {
 
     public String getEmial() {
         return emial;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactFormData{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactFormData that = (ContactFormData) o;
+        return Objects.equals(firstname, that.firstname) &&
+                Objects.equals(lastname, that.lastname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstname, lastname);
     }
 }
