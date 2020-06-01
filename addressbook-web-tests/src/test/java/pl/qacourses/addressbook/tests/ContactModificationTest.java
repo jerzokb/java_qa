@@ -22,6 +22,7 @@ public class ContactModificationTest extends TestBase {
         //ContactFormData contact = new ContactFormData("Beata", "Jerzok", "Testowy Address", "+48 123-123-123", "test@wp.pl", "test1");
         app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitContactModification();
+        app.getContactHelper().returnToHomePage();
         List<ContactFormData> after = app.getContactHelper().getContactList();
 
         Assert.assertEquals(after.size(), before.size());

@@ -18,6 +18,7 @@ public class ContactDeletionTestsChrome extends TestBaseChrome {
         app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().deleteSelectedContact();
         app.getContactHelper().acceptAlert();
+        app.getContactHelper().returnToHomePage();
 
         List<ContactFormData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() - 1);
