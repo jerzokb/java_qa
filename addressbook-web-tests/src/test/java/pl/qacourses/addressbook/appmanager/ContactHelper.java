@@ -14,7 +14,7 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void returnToHomePage() {
+    public void returnToHomePage()  {
         click(By.linkText("home page"));
     }
 
@@ -89,5 +89,9 @@ public class ContactHelper extends HelperBase {
         }
 
         return contacts;
+    }
+
+    public int getGroupCount() {
+        return wd.findElements(By.name("selected[]")).size();
     }
 }

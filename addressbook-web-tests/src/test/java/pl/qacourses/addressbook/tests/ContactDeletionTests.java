@@ -15,17 +15,21 @@ public class ContactDeletionTests extends TestBase {
         if(!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactFormData("Beata", "Jerzok", "Testowy Address", "+48 123-123-123", "test@wp.pl", "test1"));
         }
+        //int before = app.getContactHelper().getGroupCount();
         List<ContactFormData> before = app.getContactHelper().getContactList();
 
         app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().deleteSelectedContact();
         app.getContactHelper().acceptAlert();
 
+        app.getContactHelper().returnToHomePage();
+
+        //int after = app.getContactHelper().getGroupCount();
         List<ContactFormData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() - 1);
 
-        before.remove(before.size()-1);
-        Assert.assertEquals(before, after);
+       before.remove(before.size()-1);
+       Assert.assertEquals(before, after);
     }
 
 }
