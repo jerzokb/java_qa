@@ -14,10 +14,10 @@ public class ContactCreationTest extends TestBase {
   @Test
   public void testContactCreation() throws Exception {
     app.getContactNavigationHelper().gotoAddNewContactForm();
-    List<ContactFormData> before = app.getContactHelper().getContactList();
+    List<ContactFormData> before = app.getContactHelper().getContactList1();
     ContactFormData contact = new ContactFormData("Beata", "Jerzok", "Testowy Address", "+48 123-123-123", "test@wp.pl", "test1");
     app.getContactHelper().createContact(contact);
-    List<ContactFormData> after = app.getContactHelper().getContactList();
+    List<ContactFormData> after = app.getContactHelper().getContactList1();
     Assert.assertEquals(after.size(), before.size() + 1);
 
 

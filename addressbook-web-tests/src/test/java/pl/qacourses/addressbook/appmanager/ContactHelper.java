@@ -8,6 +8,7 @@ import pl.qacourses.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ContactHelper extends HelperBase {
     public ContactHelper(WebDriver wd) {
@@ -44,8 +45,15 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//input[@value='Delete']"));
    }
     public void acceptAlert() {
-        wd.switchTo().alert().accept();
+        try {
+            wd.switchTo().alert().accept();
+        } catch (NoAlertPresentException e) {
+            System.out.println("No alert is present, error: " + e);
+        }
+
+
     }
+
     public void initContactModification() {
         click(By.xpath("//img[@alt='Edit']"));
     }
@@ -60,7 +68,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void editContact(ContactFormData contactFormData) {
-       // selectContact();
+        selectContact(contactFormData.getId());
         initContactModification();
         fillContactForm(contactFormData, false);
         submitContactModification();
@@ -71,10 +79,10 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public List<ContactFormData> getContactList() {
+    public List<ContactFormData> getContactList1() {
         List<ContactFormData> contacts = new ArrayList<ContactFormData>();
-        //List<WebElement> rows_table = wd.findElements(By.name("entry"));
         List<WebElement> rows_table = wd.findElements(By.id("maintable"));
+
         int rows_count = rows_table.size();
 
         for (int row = 0; row < rows_count; row++) {
@@ -83,7 +91,7 @@ public class ContactHelper extends HelperBase {
 
             String lastname = Columns_row.get(1).getText();
             String firstname = Columns_row.get(2).getText();
-           // int id = Integer.parseInt(Columns_row.findElement(By.tagName("input")).getAttribute("value"));
+            //int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
             ContactFormData contact = new ContactFormData(row, firstname, lastname, null, null, null, null);
             contacts.add(contact);
         }
@@ -91,7 +99,14 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
-    public int getGroupCount() {
-        return wd.findElements(By.name("selected[]")).size();
+    public void waiter() {
+        wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
+
+    public void goHome() {
+        if (!isElementPresent(By.name("MainForm"))) {
+            wd.findElement(By.linkText("home")).click();
+        }
+    }
+
 }

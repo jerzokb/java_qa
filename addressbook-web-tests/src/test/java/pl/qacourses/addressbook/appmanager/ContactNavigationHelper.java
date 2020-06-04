@@ -13,4 +13,7 @@ public class ContactNavigationHelper {
     public void gotoAddNewContactForm() {
         wd.findElement(By.linkText("add new")).click();
     }
+
+
+
 }

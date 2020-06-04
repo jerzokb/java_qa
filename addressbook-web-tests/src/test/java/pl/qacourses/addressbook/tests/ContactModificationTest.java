@@ -13,17 +13,15 @@ public class ContactModificationTest extends TestBase {
     @Test
     public void testContactModification() {
         if(!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactFormData("Beata", "Jerzok", "Testowy Address", "+48 123-123-123", "test@wp.pl", "test1"));
+            app.getContactHelper().createContact(new ContactFormData(0,"Beata", "Jerzok", "Testowy Address", "+48 123-123-123", "test@wp.pl", "test1"));
         }
-        List<ContactFormData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().initContactModification();
+        List<ContactFormData> before = app.getContactHelper().getContactList1();
         ContactFormData contact = new ContactFormData(before.get(before.size() - 1).getId(),"Beata", "Jerzok", "Testowy Address", "+48 123-123-123", "test@wp.pl", "test1");
-        //ContactFormData contact = new ContactFormData("Beata", "Jerzok", "Testowy Address", "+48 123-123-123", "test@wp.pl", "test1");
-        app.getContactHelper().fillContactForm(contact, false);
-        app.getContactHelper().submitContactModification();
+
+        app.getContactHelper().editContact(contact);
+
         app.getContactHelper().returnToHomePage();
-        List<ContactFormData> after = app.getContactHelper().getContactList();
+        List<ContactFormData> after = app.getContactHelper().getContactList1();
 
         Assert.assertEquals(after.size(), before.size());
 
