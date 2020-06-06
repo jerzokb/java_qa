@@ -3,29 +3,30 @@ package pl.qacourses.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.qacourses.addressbook.model.GroupData;
+import pl.qacourses.addressbook.model.Groups;
 
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class GroupDeletionTestChrome extends TestBaseChrome {
 
   @Test
   public void testGroupDeletion() throws Exception {
-    app.getNavigationHelper().gotoGroupPage();
-    if (!app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("test1", null, null));
-
-    }
-    List<GroupData> before = app.getGroupHelper().getGroupList();
+    Groups before = app.group().all();
+    GroupData deletedGroup = before.iterator().next();
+    //int index = before.size()-1;
     // int before = app.getGroupHelper().getGroupCount();
-    app.getGroupHelper().selectGroup(before.size() - 1);
-    app.getGroupHelper().deleteSelectedGroup();
-    app.getGroupHelper().returnToGroupPage();
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    app.group().delete(deletedGroup);
+    Groups after = app.group().all();
     //int after =app.getGroupHelper().getGroupCount();
-    Assert.assertEquals(after.size(), before.size() - 1);
+    assertEquals(after.size(), before.size()-1);
 
-    before.remove(before.size()-1);
-    Assert.assertEquals(before, after);
+    //before.remove(deletedGroup);
+    assertThat(after, equalTo(before.withOut(deletedGroup)));
+    //Assert.assertEquals(before, after);
   }
 
 }
