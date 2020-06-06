@@ -10,7 +10,7 @@ public class ContactNavigationHelper {
         this.wd = wd;
     }
 
-    public void gotoAddNewContactForm() {
+    public void goToNewContactForm() {
         wd.findElement(By.linkText("add new")).click();
     }
 

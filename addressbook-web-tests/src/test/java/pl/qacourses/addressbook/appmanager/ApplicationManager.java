@@ -66,11 +66,11 @@ public class ApplicationManager {
         return navigationHelper;
     }
 
-    public ContactHelper getContactHelper() {
+    public ContactHelper contact() {
         return contactHelper;
     }
 
-    public ContactNavigationHelper getContactNavigationHelper() {
+    public ContactNavigationHelper goToContact() {
         return contactNavigationHelper;
     }
 }
