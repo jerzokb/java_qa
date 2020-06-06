@@ -10,17 +10,17 @@ public class GroupDeletionTestChrome extends TestBaseChrome {
 
   @Test
   public void testGroupDeletion() throws Exception {
-    app.getNavigationHelper().gotoGroupPage();
-    if (!app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("test1", null, null));
+    app.goTo().groupPage();
+    if (!app.group().isThereAGroup()) {
+      app.group().create(new GroupData("test1", null, null));
 
     }
-    List<GroupData> before = app.getGroupHelper().getGroupList();
+    List<GroupData> before = app.group().groupList();
     // int before = app.getGroupHelper().getGroupCount();
-    app.getGroupHelper().selectGroup(before.size() - 1);
-    app.getGroupHelper().deleteSelectedGroup();
-    app.getGroupHelper().returnToGroupPage();
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    app.group().selectGroup(before.size() - 1);
+    app.group().deleteSelectedGroup();
+    app.group().returnToGroupPage();
+    List<GroupData> after = app.group().groupList();
     //int after =app.getGroupHelper().getGroupCount();
     Assert.assertEquals(after.size(), before.size() - 1);
 

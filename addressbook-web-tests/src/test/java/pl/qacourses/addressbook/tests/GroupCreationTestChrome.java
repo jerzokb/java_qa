@@ -18,12 +18,12 @@ public class GroupCreationTestChrome extends TestBaseChrome {
    // app.getNavigationHelper().gotoGroupPage();
     //app.getGroupHelper().createGroup(new GroupData("test1", null, null));
 
-    app.getNavigationHelper().gotoGroupPage();
-    List<GroupData> before = app.getGroupHelper().getGroupList();
+    app.goTo().groupPage();
+    List<GroupData> before = app.group().groupList();
     //int before =app.getGroupHelper().getGroupCount();
     GroupData group = new GroupData("test1", null, null);
-    app.getGroupHelper().createGroup(group);
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    app.group().create(group);
+    List<GroupData> after = app.group().groupList();
     // int after =app.getGroupHelper().getGroupCount();
     Assert.assertEquals(after.size(), before.size() + 1);
 
@@ -39,7 +39,7 @@ public class GroupCreationTestChrome extends TestBaseChrome {
     //int max1 = after.stream().max(byId).get().getId();
     //group.setId(max);
 
-    group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    group.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
     before.add(group);
     Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
     before.sort(byId);
