@@ -9,6 +9,89 @@ public class ContactFormData {
     private String address;
     private String mobile;
     private String emial;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
+    private String allPhones;
+    private String emailFirst;
+    private String emailSecond;
+    private String emailThird;
+    private String allEmails;
+    private String group;
+
+    public ContactFormData withEmailFirst(String emailFirst) {
+        this.emailFirst = emailFirst;
+        return this;
+    }
+
+    public String getEmailFirst() {
+        return emailFirst;
+    }
+
+    public ContactFormData withEmailSecond(String emailSecond) {
+        this.emailSecond = emailSecond;
+        return this;
+    }
+
+    public String getEmailSecond() {
+        return emailSecond;
+    }
+
+    public ContactFormData withEmailThird(String emailThird) {
+        this.emailThird = emailThird;
+        return this;
+    }
+
+    public String getEmailThird() {
+        return emailThird;
+    }
+
+    public ContactFormData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+
+
+    public ContactFormData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public ContactFormData withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+        return this;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public ContactFormData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public ContactFormData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
 
     public ContactFormData withId(int id) {
         this.id = id;
@@ -39,8 +122,6 @@ public class ContactFormData {
         this.emial = emial;
         return this;
     }
-
-    private String group;
 
     public ContactFormData withGroup(String group) {
         this.group = group;
