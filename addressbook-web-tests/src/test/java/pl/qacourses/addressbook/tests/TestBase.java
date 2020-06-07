@@ -9,17 +9,17 @@ import pl.qacourses.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-   protected static final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
+   protected final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
    //protected final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 
-    //@BeforeMethod(alwaysRun = true)
-    @BeforeSuite
+    @BeforeMethod(alwaysRun = true)
+    //@BeforeSuite
     public void setUp() throws Exception {
         app.init();
     }
 
-    //@AfterMethod(alwaysRun = true)
-    @AfterSuite
+    @AfterMethod(alwaysRun = true)
+   // @AfterSuite
     public void tearDown() throws Exception {
         app.stop();
     }
