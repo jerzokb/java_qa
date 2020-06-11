@@ -20,7 +20,16 @@ public class ContactFormData {
     private String allEmails;
     private String name;
     private String group;
+    private File photo;
 
+    public File getPhoto() {
+        return photo;
+    }
+
+    public ContactFormData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
 
     public String getName() {return name;}
 

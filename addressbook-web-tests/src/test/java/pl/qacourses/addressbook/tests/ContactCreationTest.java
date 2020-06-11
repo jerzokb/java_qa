@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 import pl.qacourses.addressbook.model.ContactFormData;
 import pl.qacourses.addressbook.model.Contacts;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
@@ -14,12 +16,17 @@ public class ContactCreationTest extends TestBase {
     app.goToContact().goToNewContactForm();
     //List<ContactFormData> before = app.contact().getContactList1();
     Contacts before = app.contact().all();
+    File photo = new File("src/test/resources/contact_img.png");
+    //ContactFormData contact =
+           // new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").withMobile("+48 123-123-123").withEmial("test@wp.pl").withGroup("test1");
     ContactFormData contact =
-            new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").withMobile("+48 123-123-123").withEmial("test@wp.pl").withGroup("test1");
+            new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").
+                    withMobile("+48 123-123-123").withEmial("test@wp.pl").withPhoto(photo);
     app.contact().create(contact);
     //List<ContactFormData> after = app.contact().getContactList1();
     Contacts after = app.contact().all();
     //Assert.assertEquals(after.size(), before.size() + 1);
+
     assertThat(after.size(), equalTo(before.size() + 1));
 
 
@@ -32,6 +39,16 @@ public class ContactCreationTest extends TestBase {
     //Assert.assertEquals(before, after);
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c)->c.getId()).max().getAsInt()))));
   }
+
+ /* @Test
+  public void testCurrentDir() {
+    File currentDir = new File(".");
+    System.out.println(currentDir.getAbsolutePath());
+    File photo = new File("src/test/resources/contact_img.png");
+    System.out.println(photo.getAbsolutePath());
+    System.out.println(photo.exists());
+
+  }*/
 
 
 }
