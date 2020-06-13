@@ -28,7 +28,8 @@ public class ContactHelper extends HelperBase {
         type(By.name("lastname"),contactFormData.getLastname());
         type(By.name("address"),contactFormData.getAddress());
         type(By.name("mobile"),contactFormData.getMobile());
-        type(By.name("email"),contactFormData.getEmial());
+        type(By.name("email"),contactFormData.getEmail());
+        attach(By.name("photo"),contactFormData.getPhoto());
 
         if (creation) {
             new Select (wd.findElement(By.name("new_group"))).selectByVisibleText(contactFormData.getGroup());
@@ -172,5 +173,18 @@ public class ContactHelper extends HelperBase {
 //    wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click();
 //    wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click();
 //    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+    }
+
+    public ContactFormData infoFromDetails(ContactFormData contact) {
+        initContactDetailsById(contact.getId());
+        String detailName = wd.findElement(By.id("content")).getText();
+        return new ContactFormData().withId(contact.getId()).withName(detailName);
+    }
+
+    private void initContactDetailsById(int id) {
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+        WebElement row = checkbox.findElement(By.xpath("./../.."));
+        List<WebElement> cells = row.findElements(By.tagName("td"));
+        cells.get(6).findElement(By.tagName("a")).click();
     }
 }

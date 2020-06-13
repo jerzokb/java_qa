@@ -1,14 +1,27 @@
 package pl.qacourses.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+import java.io.File;
 import java.util.Objects;
 
+@XStreamAlias("contact")
+
 public class ContactFormData {
-    private int id = Integer.MAX_VALUE;;
+    @XStreamOmitField
+    private int id = Integer.MAX_VALUE;
+    @Expose
     private String firstname;
+    @Expose
     private String lastname;
+    @Expose
     private String address;
+    @Expose
     private String mobile;
-    private String emial;
+    @Expose
+    private String email;
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
@@ -17,7 +30,25 @@ public class ContactFormData {
     private String emailSecond;
     private String emailThird;
     private String allEmails;
+    private String name;
     private String group;
+    private File photo;
+
+    public File getPhoto() {
+        return photo;
+    }
+
+    public ContactFormData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public String getName() {return name;}
+
+    public ContactFormData withName(String name) {
+        this.name = name;
+        return  this;
+    }
 
     public ContactFormData withEmailFirst(String emailFirst) {
         this.emailFirst = emailFirst;
@@ -119,7 +150,7 @@ public class ContactFormData {
     }
 
     public ContactFormData withEmial(String emial) {
-        this.emial = emial;
+        this.email = emial;
         return this;
     }
 
@@ -172,8 +203,8 @@ public class ContactFormData {
         return mobile;
     }
 
-    public String getEmial() {
-        return emial;
+    public String getEmail() {
+        return email;
     }
 
     public int getId() {
@@ -186,6 +217,13 @@ public class ContactFormData {
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
+                ", address='" + address + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", workPhone='" + workPhone + '\'' +
+                ", emailFirst='" + emailFirst + '\'' +
+                ", emailSecond='" + emailSecond + '\'' +
+                ", emailThird='" + emailThird + '\'' +
                 '}';
     }
 
@@ -196,11 +234,20 @@ public class ContactFormData {
         ContactFormData that = (ContactFormData) o;
         return id == that.id &&
                 Objects.equals(firstname, that.firstname) &&
-                Objects.equals(lastname, that.lastname);
+                Objects.equals(lastname, that.lastname) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(mobile, that.mobile) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(homePhone, that.homePhone) &&
+                Objects.equals(mobilePhone, that.mobilePhone) &&
+                Objects.equals(workPhone, that.workPhone) &&
+                Objects.equals(emailFirst, that.emailFirst) &&
+                Objects.equals(emailSecond, that.emailSecond) &&
+                Objects.equals(emailThird, that.emailThird);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname);
+        return Objects.hash(id, firstname, lastname, address, mobile, email, homePhone, mobilePhone, workPhone, emailFirst, emailSecond, emailThird);
     }
 }

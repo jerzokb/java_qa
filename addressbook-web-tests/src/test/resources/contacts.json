@@ -1,0 +1,37 @@
+[
+  {
+    "firstname": "Beata0",
+    "lastname": "Palka0",
+    "address": "Polna0",
+    "mobile": "123456780",
+    "email": "beata.palka0@wp.pl"
+  },
+  {
+    "firstname": "Beata1",
+    "lastname": "Palka1",
+    "address": "Polna1",
+    "mobile": "123456781",
+    "email": "beata.palka1@wp.pl"
+  },
+  {
+    "firstname": "Beata2",
+    "lastname": "Palka2",
+    "address": "Polna2",
+    "mobile": "123456782",
+    "email": "beata.palka2@wp.pl"
+  },
+  {
+    "firstname": "Beata3",
+    "lastname": "Palka3",
+    "address": "Polna3",
+    "mobile": "123456783",
+    "email": "beata.palka3@wp.pl"
+  },
+  {
+    "firstname": "Beata4",
+    "lastname": "Palka4",
+    "address": "Polna4",
+    "mobile": "123456784",
+    "email": "beata.palka4@wp.pl"
+  }
+]
