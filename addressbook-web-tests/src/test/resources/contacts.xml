@@ -1,0 +1,37 @@
+<list>
+  <contact>
+    <firstname>Beata0</firstname>
+    <lastname>Palka0</lastname>
+    <address>Polna0</address>
+    <mobile>123456780</mobile>
+    <emial>beata.palka0@wp.pl</emial>
+  </contact>
+  <contact>
+    <firstname>Beata1</firstname>
+    <lastname>Palka1</lastname>
+    <address>Polna1</address>
+    <mobile>123456781</mobile>
+    <emial>beata.palka1@wp.pl</emial>
+  </contact>
+  <contact>
+    <firstname>Beata2</firstname>
+    <lastname>Palka2</lastname>
+    <address>Polna2</address>
+    <mobile>123456782</mobile>
+    <emial>beata.palka2@wp.pl</emial>
+  </contact>
+  <contact>
+    <firstname>Beata3</firstname>
+    <lastname>Palka3</lastname>
+    <address>Polna3</address>
+    <mobile>123456783</mobile>
+    <emial>beata.palka3@wp.pl</emial>
+  </contact>
+  <contact>
+    <firstname>Beata4</firstname>
+    <lastname>Palka4</lastname>
+    <address>Polna4</address>
+    <mobile>123456784</mobile>
+    <emial>beata.palka4@wp.pl</emial>
+  </contact>
+</list>
