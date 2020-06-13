@@ -22,7 +22,6 @@ public class ContactFormData {
     private String mobile;
     @Expose
     private String email;
-    @Expose
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
