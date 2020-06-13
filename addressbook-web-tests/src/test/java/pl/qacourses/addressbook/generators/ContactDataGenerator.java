@@ -8,14 +8,13 @@ import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import pl.qacourses.addressbook.model.ContactFormData;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class ContactDataGenerator {
+    private final Properties properties;
 
     @Parameter(names = "-c", description = "Contact count")
     public int count;
@@ -25,6 +24,10 @@ public class ContactDataGenerator {
 
     @Parameter(names = "-d", description = "Data format")
     public String format;
+
+    public ContactDataGenerator() {
+        properties = new Properties();
+    }
 
     public static void main(String[] args) throws IOException {
         ContactDataGenerator generator = new ContactDataGenerator();
@@ -56,17 +59,7 @@ public class ContactDataGenerator {
 
     }
 
-    private List<ContactFormData> generateContacts(int count) {
-        List<ContactFormData> contacts = new ArrayList<ContactFormData>();
-        for (int i = 0; i < count; i++) {
-            contacts.add(new ContactFormData().withFirstname(String.format("Beata%s", i))
-                    .withLastname(String.format("Palka%s", i))
-                    .withAddress(String.format("Polna%s", i))
-                    .withMobile(String.format("12345678%s", i))
-                    .withEmial(String.format("beata.palka%s@wp.pl", i)));
-        }
-        return contacts;
-    }
+
 
     private void saveAsJson(List<ContactFormData> contacts, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
@@ -91,5 +84,19 @@ public class ContactDataGenerator {
                 writer.write(String.format("%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getLastname(), contact.getAddress(), contact.getMobile(), contact.getEmail()));
             }
         }
+    }
+
+    private List<ContactFormData> generateContacts(int count) throws IOException {
+        String target = System.getProperty("target", "local");
+        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+        List<ContactFormData> contacts = new ArrayList<ContactFormData>();
+        for (int i = 0; i < count; i++) {
+            contacts.add(new ContactFormData().withFirstname(String.format(properties.getProperty("web.FirstName") + "%s", i))
+                    .withLastname(String.format(properties.getProperty("web.LastName") + "%s", i))
+                    .withAddress(String.format(properties.getProperty("web.Address") + "%s", i))
+                    .withMobile(String.format(properties.getProperty("web.Mobile") + "%s", i))
+                    .withEmial(String.format(properties.getProperty("web.Email") + "%s", i)));
+        }
+        return contacts;
     }
 }

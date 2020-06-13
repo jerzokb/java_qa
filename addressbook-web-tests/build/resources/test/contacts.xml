@@ -1,37 +1,37 @@
 <list>
   <contact>
-    <firstname>Beata0</firstname>
-    <lastname>Palka0</lastname>
-    <address>Polna0</address>
-    <mobile>123456780</mobile>
-    <emial>beata.palka0@wp.pl</emial>
+    <firstname>testFirstName0</firstname>
+    <lastname>testLastName0</lastname>
+    <address>testAddress0</address>
+    <mobile>1234560</mobile>
+    <email>test@wp.pl0</email>
   </contact>
   <contact>
-    <firstname>Beata1</firstname>
-    <lastname>Palka1</lastname>
-    <address>Polna1</address>
-    <mobile>123456781</mobile>
-    <emial>beata.palka1@wp.pl</emial>
+    <firstname>testFirstName1</firstname>
+    <lastname>testLastName1</lastname>
+    <address>testAddress1</address>
+    <mobile>1234561</mobile>
+    <email>test@wp.pl1</email>
   </contact>
   <contact>
-    <firstname>Beata2</firstname>
-    <lastname>Palka2</lastname>
-    <address>Polna2</address>
-    <mobile>123456782</mobile>
-    <emial>beata.palka2@wp.pl</emial>
+    <firstname>testFirstName2</firstname>
+    <lastname>testLastName2</lastname>
+    <address>testAddress2</address>
+    <mobile>1234562</mobile>
+    <email>test@wp.pl2</email>
   </contact>
   <contact>
-    <firstname>Beata3</firstname>
-    <lastname>Palka3</lastname>
-    <address>Polna3</address>
-    <mobile>123456783</mobile>
-    <emial>beata.palka3@wp.pl</emial>
+    <firstname>testFirstName3</firstname>
+    <lastname>testLastName3</lastname>
+    <address>testAddress3</address>
+    <mobile>1234563</mobile>
+    <email>test@wp.pl3</email>
   </contact>
   <contact>
-    <firstname>Beata4</firstname>
-    <lastname>Palka4</lastname>
-    <address>Polna4</address>
-    <mobile>123456784</mobile>
-    <emial>beata.palka4@wp.pl</emial>
+    <firstname>testFirstName4</firstname>
+    <lastname>testLastName4</lastname>
+    <address>testAddress4</address>
+    <mobile>1234564</mobile>
+    <email>test@wp.pl4</email>
   </contact>
 </list>
