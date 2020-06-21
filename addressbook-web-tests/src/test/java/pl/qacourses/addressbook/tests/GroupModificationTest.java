@@ -66,6 +66,7 @@ public class GroupModificationTest extends TestBase {
         //int index = before.size()-1;
         GroupData group = new GroupData()
                 .withId(modifiedGroup.getId()).withName("test1").withHeader("test2").withFooter("test3");
+        app.goTo().groupPage();
         app.group().modify(group);
         Groups after = app.db().groups();
         //int after =app.getGroupHelper().getGroupCount();
@@ -77,10 +78,11 @@ public class GroupModificationTest extends TestBase {
         //before.sort(byId);
         //after.sort(byId);
         //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
-        assertEquals(before, after);
+        assertThat(before, equalTo(after));
         assertThat(after, equalTo(before.withOut(modifiedGroup).withAdded(group)));
-
+        verifyGroupListInUI();
     }
+
 
 
 }

@@ -76,6 +76,20 @@ public class ContactCreationTest extends TestBase {
         assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c)->c.getId()).max().getAsInt()))));
   }
 
+  @Test(dataProvider = "validContactsFromXML")
+  public void testContactCreationDB(ContactFormData contact) throws Exception {
+    app.goToContact().goToNewContactForm();
+    Contacts before = app.db().contacts();
+    //ContactFormData contact =
+    //        new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").
+    //                withMobile("+48 123-123-123").withEmial("test@wp.pl").withPhoto(photo);
+    app.contact().create(contact);
+    assertThat(app.contact().count(), equalTo(before.size() + 1));
+    Contacts after = app.db().contacts();
+    assertThat(after, equalTo(before.
+            withAdded(contact.withId(after.stream().mapToInt(g -> g.getId()).max().getAsInt()))));
+  }
+
   @Test(enabled = false)
   public void testContactCreationWithPhoto() throws Exception {
     app.goToContact().goToNewContactForm();

@@ -9,7 +9,10 @@ import org.hibernate.annotations.Type;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("group")
 @Entity
@@ -31,6 +34,9 @@ public class GroupData {
     @Type(type = "text")
     private String footer;
 
+    @ManyToMany(mappedBy = "groups")
+    private Set<ContactFormData> contacts = new HashSet<ContactFormData>();
+
     @Override
     public String toString() {
         return "GroupData{" +
@@ -43,7 +49,11 @@ public class GroupData {
         return id;
     }
 
-    /*public GroupData(String name, String header, String footer) {
+    public Set<ContactFormData> getContacts() {
+        return contacts;
+    }
+
+   /*public GroupData(String name, String header, String footer) {
         this.id = Integer.MAX_VALUE;
         this.name = name;
         this.header = header;

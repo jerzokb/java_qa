@@ -5,12 +5,11 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -56,11 +55,19 @@ public class ContactFormData {
     private String allEmails;
     @Transient
     private String name;
-    @Transient
-    private String group;
+
+    //@Transient
+    //private String group;
+
     @Column(name ="photo")
     @Type(type = "text")
     private String photo;
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
 
     public File getPhoto() {
         return new File(photo);
@@ -182,14 +189,18 @@ public class ContactFormData {
         return this;
     }
 
-    public ContactFormData withGroup(String group) {
-        this.group = group;
-        return this;
+    public Groups getGroups() {
+        return new Groups(groups);
     }
 
-    public String getGroup() {
-        return group;
-    }
+    // public ContactFormData withGroup(String group) {
+   //     this.group = group;
+    //    return this;
+    //}
+
+    //public String getGroup() {
+    //    return group;
+   // }
 
     /*public ContactFormData(String firstname, String lastname, String address, String mobile, String emial, String group) {
         this.id = Integer.MAX_VALUE;
@@ -271,4 +282,10 @@ public class ContactFormData {
     public int hashCode() {
         return Objects.hash(id, firstname, lastname, address, mobile, email, homePhone, mobilePhone, workPhone, emailFirst, emailSecond, emailThird);
     }
+
+    public ContactFormData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
+    }
+
 }
