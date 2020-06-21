@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import pl.qacourses.addressbook.model.ContactFormData;
 import pl.qacourses.addressbook.model.Contacts;
 import pl.qacourses.addressbook.model.GroupData;
+import pl.qacourses.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -78,12 +79,13 @@ public class ContactCreationTest extends TestBase {
 
   @Test(dataProvider = "validContactsFromXML")
   public void testContactCreationDB(ContactFormData contact) throws Exception {
+    Groups groups = app.db().groups();
     app.goToContact().goToNewContactForm();
     Contacts before = app.db().contacts();
     //ContactFormData contact =
-    //        new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").
-    //                withMobile("+48 123-123-123").withEmial("test@wp.pl").withPhoto(photo);
-    app.contact().create(contact);
+     //       new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").
+     //               withMobile("+48 123-123-123").withEmial("test@wp.pl").inGroup(groups.iterator().next());
+    app.contact().create(contact.inGroup(groups.iterator().next()));
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.
