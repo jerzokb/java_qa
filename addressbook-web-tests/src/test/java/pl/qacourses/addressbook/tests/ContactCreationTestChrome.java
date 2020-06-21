@@ -15,7 +15,7 @@ public class ContactCreationTestChrome extends TestBaseChrome {
         //List<ContactFormData> before = app.contact().getContactList1();
         Contacts before = app.contact().all();
         ContactFormData contact =
-                new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").withMobile("+48 123-123-123").withEmial("test@wp.pl").withGroup("test1");
+                new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").withMobile("+48 123-123-123").withEmial("test@wp.pl");
         app.contact().create(contact);
         //List<ContactFormData> after = app.contact().getContactList1();
         Contacts after = app.contact().all();

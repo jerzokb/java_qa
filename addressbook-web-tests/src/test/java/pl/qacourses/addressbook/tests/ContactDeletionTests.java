@@ -15,7 +15,7 @@ public class ContactDeletionTests extends TestBase {
 
         if(!app.contact().isThereAContact()) {
             app.contact().create(
-                    new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").withMobile("+48 123-123-123").withEmial("test@wp.pl").withGroup("test1"));
+                    new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").withMobile("+48 123-123-123").withEmial("test@wp.pl"));
         }
         //int before = app.getContactHelper().getGroupCount();
         //List<ContactFormData> before = app.contact().getContactList1();
@@ -43,6 +43,31 @@ public class ContactDeletionTests extends TestBase {
         assertThat(after, equalTo(before.withOut(deletedContact)));
 
        //Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(before));
+    }
+
+    @Test
+    public void testContactDeletionDB() {
+
+        if(!app.contact().isThereAContact()) {
+            app.contact().create(
+                    new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").withMobile("+48 123-123-123").withEmial("test@wp.pl"));
+        }
+
+        Contacts before = app.db().contacts();
+        ContactFormData deletedContact = before.iterator().next();
+
+        app.contact().selectById(deletedContact.getId());
+        app.contact().delete();
+
+
+        app.contact().acceptAlert();
+        app.contact().goHome();
+        app.contact().waiter();
+
+        assertThat(app.contact().count(), equalTo(before.size()-1));
+        Contacts after = app.db().contacts();
+        assertThat(after, equalTo(before.withOut(deletedContact)));
+
     }
 
 }

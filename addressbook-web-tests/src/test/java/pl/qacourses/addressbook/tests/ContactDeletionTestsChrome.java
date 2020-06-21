@@ -15,7 +15,7 @@ public class ContactDeletionTestsChrome extends TestBaseChrome {
 
         if(!app.contact().isThereAContact()) {
             app.contact().create(
-                    new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").withMobile("+48 123-123-123").withEmial("test@wp.pl").withGroup("test1"));
+                    new ContactFormData().withFirstname("Beata").withLastname("Jerzok").withAddress("Testowy Address").withMobile("+48 123-123-123").withEmial("test@wp.pl"));
         }
         //int before = app.getContactHelper().getGroupCount();
         //List<ContactFormData> before = app.contact().getContactList1();

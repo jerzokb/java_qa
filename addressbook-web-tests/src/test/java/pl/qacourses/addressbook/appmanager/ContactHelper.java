@@ -32,7 +32,10 @@ public class ContactHelper extends HelperBase {
         attach(By.name("photo"),contactFormData.getPhoto());
 
         if (creation) {
-            new Select (wd.findElement(By.name("new_group"))).selectByVisibleText(contactFormData.getGroup());
+            if (contactFormData.getGroups().size() > 0) {
+                Assert.assertTrue(contactFormData.getGroups().size() == 1);
+                new Select (wd.findElement(By.name("new_group"))).selectByVisibleText(contactFormData.getGroups().iterator().next().getName());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -186,5 +189,9 @@ public class ContactHelper extends HelperBase {
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(6).findElement(By.tagName("a")).click();
+    }
+
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
     }
 }

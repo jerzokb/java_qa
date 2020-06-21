@@ -98,20 +98,20 @@ public class GroupCreationTest extends TestBase {
       assertThat(app.group().count(), equalTo(before.size() + 1));
       Groups after = app.group().all();
 
-      //assertThat(after.size(), equalTo(before.size() + 1));
+      assertThat(after.size(), equalTo(before.size() + 1));
 
 
-      assertThat(after, equalTo(before.withAdded(group.withId(after.stream()
-              .mapToInt((g) -> g.getId()).max().getAsInt()))));
+      assertThat(after, equalTo(
+              before.withAdded(group.withId(after.stream().mapToInt(g -> g.getId()).max().getAsInt()))));
 
-   // }
+      /* } */
   }
 
   @Test(enabled = false)
   public void testBadGroupCreation() throws Exception {
     app.goTo().groupPage();
     Groups before = app.group().all();
-    GroupData group = new GroupData().withName("test2'");
+    GroupData group = new GroupData().withName("test2'").withHeader("test2").withFooter("test3");
     app.group().create(group);
     assertThat(app.group().count(), equalTo(before.size()));
     Groups after = app.group().all();
@@ -119,6 +119,27 @@ public class GroupCreationTest extends TestBase {
     assertThat(after, equalTo(before));
 
   }
+
+    @Test(dataProvider = "validGroupsFromJson")
+    public void testGroupCreationDB(GroupData group) throws Exception {
+
+        // String[] names = new String[] {"test1",  "test2", "test3"};
+        // for (String name : names) {
+        //GroupData group = new GroupData().withName(name)
+        //        .withHeader(header).withFooter(footer);
+        app.goTo().groupPage();
+
+        Groups before = app.db().groups();
+        app.group().create(group);
+        assertThat(app.group().count(), equalTo(before.size() + 1));
+        Groups after = app.db().groups();
+
+        assertThat(after.size(), equalTo(before.size() + 1));
+
+        assertThat(after, equalTo(
+                before.withAdded(group.withId(after.stream().mapToInt(g -> g.getId()).max().getAsInt()))));
+
+    }
 
 
 }
