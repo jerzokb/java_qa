@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.qacourses.addressbook.model.ContactFormData;
 import pl.qacourses.addressbook.model.Contacts;
+import pl.qacourses.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +86,23 @@ public class ContactHelper extends HelperBase {
         initModification();
         fillForm(contactFormData, false);
         submitModification();
+    }
+
+    public void addToGroup(ContactFormData contactFormData, GroupData groupData) {
+        selectById(contactFormData.getId());
+        click(By.name("to_group"));
+        //new Select(wd.findElement(By.name("to_group"))).selectByVisibleText("test1");
+        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(groupData.getName());
+        click(By.name("add"));
+        click(By.linkText("group page "+ groupData.getName()));
+    }
+
+    public void removeFromGroup(ContactFormData contactFormData, GroupData groupData) {
+        wd.get("http://localhost/addressbook/?group=" + groupData.getId());
+        selectById(contactFormData.getId());
+        click(By.name("remove"));
+        //new Select(wd.findElement(By.name("to_group"))).selectByVisibleText("test1");
+        click(By.linkText("group page "+ groupData.getName()));
     }
 
 

@@ -11,6 +11,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import pl.qacourses.addressbook.appmanager.ApplicationManager;
+import pl.qacourses.addressbook.model.Contacts;
 import pl.qacourses.addressbook.model.GroupData;
 import pl.qacourses.addressbook.model.Groups;
 
@@ -59,6 +60,16 @@ public class TestBase {
                     .collect(Collectors.toSet())));
         }
 
+    }
+
+    public void verifyContactListInUI() {
+        if (Boolean.getBoolean("verifyUI")) {
+            Contacts dbContacts = app.db().contacts();
+            Contacts uiContacts = app.contact().all();
+            assertThat(uiContacts, equalTo(dbContacts.stream().
+                    map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
+                    .collect(Collectors.toSet())));
+        }
     }
 
 
