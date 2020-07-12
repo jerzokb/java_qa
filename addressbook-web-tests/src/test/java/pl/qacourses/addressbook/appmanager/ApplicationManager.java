@@ -40,13 +40,20 @@ public class ApplicationManager {
 
         dbHelper = new DbHelper();
 
-        if (browser.equals(BrowserType.FIREFOX)) {
-            wd = new FirefoxDriver();
-        } else if (browser.equals(BrowserType.CHROME)) {
-            wd = new ChromeDriver();
-        } else if (browser.equals(BrowserType.IE)) {
-            wd = new InternetExplorerDriver();
-        }
+        if ("".equals(properties.getProperty("selenium.server"))) {
+      if (browser.equals(BrowserType.FIREFOX)) {
+        wd = new FirefoxDriver();
+      } else if (browser.equals(BrowserType.CHROME)) {
+        wd = new ChromeDriver();
+      } else if (browser.equals(BrowserType.IE)) {
+        wd = new InternetExplorerDriver();
+      }
+    } else {
+      DesiredCapabilities capabilities = new DesiredCapabilities();
+      capabilities.setBrowserName(browser);
+      capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win7")));
+      wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
+    }
 
         wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         //wd.get("http://localhost/addressbook/");
